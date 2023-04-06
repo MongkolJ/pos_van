@@ -7,3 +7,4 @@ const Color kBackgroundColor = Color.fromRGBO(245, 245, 245, 1);
 const Color kCardBackgroundColor = Color.fromRGBO(250, 250, 251, 1);
 
 const Color kFadedTextColor = Color.fromRGBO(111, 128, 154, 1);
+const Color kRedTextColor = Colors.red;

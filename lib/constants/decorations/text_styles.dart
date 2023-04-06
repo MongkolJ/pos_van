@@ -22,3 +22,14 @@ const TextStyle kHighLightBodyTextStyle = TextStyle(
   color: kPrimaryDarkColor,
   fontSize: 16,
 );
+
+const TextStyle kRedIndicatorTextStyle = TextStyle(
+  color: kRedTextColor,
+  fontSize: 12,
+);
+
+const TextStyle kSubHeaderTextStyle = TextStyle(
+  color: kPrimaryDarkColor,
+  fontWeight: FontWeight.bold,
+  fontSize: 20,
+);

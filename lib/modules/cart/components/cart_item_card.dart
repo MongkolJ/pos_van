@@ -79,12 +79,58 @@ class CartItemCard extends StatelessWidget {
                       fillColor: kFadedTextColor,
                       size: 40,
                     ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                width: 2,
+                                color: kPrimaryLightColor,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                width: 2,
+                                color: kPrimaryDarkColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     CircularIconButton(
                       icon: Icons.add,
                       iconColor: Colors.white,
                       onTapped: () async {},
                       fillColor: kPrimaryLightColor,
                       size: 40,
+                    ),
+                  ],
+                ),
+                _subSectionBuffer(),
+                const Text(
+                  'เหลือ: 10 ชิ้น',
+                  style: kRedIndicatorTextStyle,
+                ),
+                _subSectionBuffer(),
+                Row(
+                  children: [
+                    const Spacer(),
+                    const Text(
+                      'รวม 2,187 บาท',
+                      style: kSubHeaderTextStyle,
+                    ),
+                    const SizedBox(width: 12),
+                    GestureDetector(
+                      onTap: () async {},
+                      child: const Icon(
+                        Icons.delete_outline,
+                        color: kRedTextColor,
+                      ),
                     ),
                   ],
                 ),
