@@ -19,30 +19,32 @@ class _MenuViewState extends State<MenuView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _viewOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'ออร์เดอร์',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'ออร์เดอร์',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'ออร์เดอร์',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: (int newIndex) {
-          _selectedIndex = newIndex;
-          setState(() {});
-        },
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: _viewOptions.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart_outlined),
+              label: 'ออร์เดอร์',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart_outlined),
+              label: 'ออร์เดอร์',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart_outlined),
+              label: 'ออร์เดอร์',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          onTap: (int newIndex) {
+            _selectedIndex = newIndex;
+            setState(() {});
+          },
+        ),
       ),
     );
   }
