@@ -11,49 +11,52 @@ class CartItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: kCardDecoration,
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(12),
       child: Row(
         children: [
           Expanded(
             flex: 3,
             child: Column(
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'SKU Title',
+                    'ช้างเล็กยกลัง',
                     style: kTitleTextStyle,
                   ),
                 ),
                 _subSectionBuffer(),
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'barcode',
+                    '8851993613102',
                     style: kSecondaryContentTextStyle,
                   ),
                 ),
                 _subSectionBuffer(),
-                Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Price',
+                    '729.00 บาท/ชิ้น',
                     style: kHighLightBodyTextStyle,
                   ),
                 ),
-                _subSectionBuffer(height: 12),
+                _subSectionBuffer(height: 8),
                 SizedBox(
                   height: 36,
                   child: Row(
                     children: [
                       CircularIconButton(
                         icon: Icons.card_giftcard,
-                        colorTheme: kPrimaryLightColor,
+                        iconColor: kPrimaryLightColor,
                         onTapped: () async {},
+                      ),
+                      const SizedBox(
+                        width: 16,
                       ),
                       CircularIconButton(
                         icon: Icons.percent,
-                        colorTheme: kPrimaryLightColor,
+                        iconColor: kPrimaryLightColor,
                         onTapped: () async {},
                       ),
                     ],
@@ -65,7 +68,27 @@ class CartItemCard extends StatelessWidget {
           Expanded(
             flex: 5,
             child: Column(
-              children: [],
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CircularIconButton(
+                      icon: Icons.remove,
+                      iconColor: Colors.white,
+                      onTapped: () async {},
+                      fillColor: kFadedTextColor,
+                      size: 40,
+                    ),
+                    CircularIconButton(
+                      icon: Icons.add,
+                      iconColor: Colors.white,
+                      onTapped: () async {},
+                      fillColor: kPrimaryLightColor,
+                      size: 40,
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],

@@ -20,19 +20,21 @@ class _CartViewState extends State<CartView> {
         backgroundColor: kBackgroundColor,
         body: Column(
           children: [
+            _sectionBuffer(),
             const Center(
               child: Text(
                 'รายการขายเงินสด',
                 style: kHeaderTextStyle,
               ),
             ),
+            _sectionBuffer(),
             Expanded(
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  return const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: CartItemCard(),
                   );
                 },
@@ -41,6 +43,12 @@ class _CartViewState extends State<CartView> {
           ],
         ),
       ),
+    );
+  }
+
+  SizedBox _sectionBuffer() {
+    return const SizedBox(
+      height: 8,
     );
   }
 }

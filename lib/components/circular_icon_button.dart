@@ -4,29 +4,35 @@ class CircularIconButton extends StatelessWidget {
   const CircularIconButton({
     Key? key,
     required this.icon,
-    required this.colorTheme,
+    required this.iconColor,
     required this.onTapped,
+    this.fillColor,
+    this.size = 36,
   }) : super(key: key);
 
   final IconData icon;
-  final Color colorTheme;
+  final Color iconColor;
   final Future<void> Function() onTapped;
+  final double size;
+  final Color? fillColor;
 
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: onTapped,
       elevation: 0,
-      constraints: const BoxConstraints.expand(width: 36, height: 36),
+      fillColor: fillColor,
+      constraints: BoxConstraints.expand(width: size, height: size),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       shape: CircleBorder(
         side: BorderSide(
-          color: colorTheme,
+          color: iconColor,
           width: 1,
         ),
       ),
       child: Icon(
         icon,
-        color: colorTheme,
+        color: iconColor,
       ),
     );
   }

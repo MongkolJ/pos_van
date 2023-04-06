@@ -4,12 +4,13 @@ import 'colors.dart';
 const TextStyle kHeaderTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: kPrimaryDarkColor,
-  fontSize: 20,
+  fontSize: 24,
 );
 
 const TextStyle kTitleTextStyle = TextStyle(
   color: Colors.black,
-  fontSize: 14,
+  fontWeight: FontWeight.w600,
+  fontSize: 18,
 );
 
 const TextStyle kSecondaryContentTextStyle = TextStyle(
@@ -18,6 +19,6 @@ const TextStyle kSecondaryContentTextStyle = TextStyle(
 );
 
 const TextStyle kHighLightBodyTextStyle = TextStyle(
-  color: kPrimaryLightColor,
-  fontSize: 14,
+  color: kPrimaryDarkColor,
+  fontSize: 16,
 );
