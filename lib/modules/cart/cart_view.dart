@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pos_van/constants/decorations/colors.dart';
 import 'package:pos_van/constants/decorations/text_styles.dart';
 import 'package:pos_van/modules/cart/cart_item_model.dart';
+import 'package:pos_van/modules/cart/cart_view_model.dart';
 import 'package:pos_van/modules/cart/components/cart_item_card.dart';
 
 class CartView extends StatefulWidget {
@@ -12,6 +13,8 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
+  final CartViewModel _viewModel = CartViewModel();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,20 +36,14 @@ class _CartViewState extends State<CartView> {
               _sectionBuffer(),
               Expanded(
                 child: ListView.builder(
+                  itemCount: _viewModel.items.length,
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CartItemCard(
-                        model: CartItemModel(
-                          sku: 'sku',
-                          barcode: '8851993613102',
-                          title: 'ช้างเล็กยกลัง',
-                          price: 729,
-                          amount: 1,
-                          remainInStock: 10,
-                        ),
+                        model: _viewModel.items[index],
                       ),
                     );
                   },
