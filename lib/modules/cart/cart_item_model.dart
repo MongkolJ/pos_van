@@ -22,7 +22,7 @@ class CartItemModel {
     barcode = map['barcode'];
     title = map['title'];
     price = map['price'];
-    amount = 0;
+    amount = 1;
     remainInStock = map['remainInStock'];
   }
 

@@ -147,7 +147,7 @@ class _CartItemCardState extends State<CartItemCard> {
                 ),
                 _subSectionBuffer(),
                 Text(
-                  'เหลือ: ${widget.model.amount} ชิ้น',
+                  'เหลือ: ${widget.model.remainInStock} ชิ้น',
                   style: kRedIndicatorTextStyle,
                 ),
                 _subSectionBuffer(),
