@@ -10,21 +10,28 @@ class CartItemCard extends StatefulWidget {
   const CartItemCard({
     Key? key,
     required this.model,
+    required this.amountController,
+    required this.onUserTappedDeleteButton,
+    required this.onUserTappedIncreaseButton,
+    required this.onUserTappedDecreaseButton,
+    required this.onUserSetAmount,
   }) : super(key: key);
 
   final CartItemModel model;
+  final Future<void> Function() onUserTappedDeleteButton;
+  final Future<void> Function() onUserTappedIncreaseButton;
+  final Future<void> Function() onUserTappedDecreaseButton;
+  final Future<void> Function() onUserSetAmount;
+  final TextEditingController amountController;
 
   @override
   State<CartItemCard> createState() => _CartItemCardState();
 }
 
 class _CartItemCardState extends State<CartItemCard> {
-  final TextEditingController _amountController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
-    _amountController.text = widget.model.amount.toStringAsFixed(0);
   }
 
   @override
@@ -95,15 +102,7 @@ class _CartItemCardState extends State<CartItemCard> {
                     CircularIconButton(
                       icon: Icons.remove,
                       iconColor: Colors.white,
-                      onTapped: () async {
-                        bool adjustAmountResult = widget.model.decreaseAmount();
-                        if (!adjustAmountResult) {
-                          return;
-                        }
-
-                        _amountController.text =
-                            widget.model.amount.toStringAsFixed(0);
-                      },
+                      onTapped: widget.onUserTappedDecreaseButton,
                       fillColor: kFadedTextColor,
                       size: 40,
                     ),
@@ -111,35 +110,15 @@ class _CartItemCardState extends State<CartItemCard> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12.0),
                         child: BorderedTextField(
-                          controller: _amountController,
-                          onEditingEnd: () async {
-                            int? newAmount =
-                                int.tryParse(_amountController.text);
-                            if (newAmount == null) {
-                              setState(() {
-                                _amountController.clear();
-                              });
-                              return;
-                            }
-
-                            widget.model.setAmount(amount: newAmount);
-                            setState(() {});
-                          },
+                          controller: widget.amountController,
+                          onEditingEnd: widget.onUserSetAmount,
                         ),
                       ),
                     ),
                     CircularIconButton(
                       icon: Icons.add,
                       iconColor: Colors.white,
-                      onTapped: () async {
-                        bool adjustAmountResult = widget.model.increaseAmount();
-                        if (!adjustAmountResult) {
-                          return;
-                        }
-
-                        _amountController.text =
-                            widget.model.amount.toStringAsFixed(0);
-                      },
+                      onTapped: widget.onUserTappedIncreaseButton,
                       fillColor: kPrimaryLightColor,
                       size: 40,
                     ),
@@ -160,7 +139,7 @@ class _CartItemCardState extends State<CartItemCard> {
                     ),
                     const SizedBox(width: 12),
                     GestureDetector(
-                      onTap: () async {},
+                      onTap: widget.onUserTappedDeleteButton,
                       child: const Icon(
                         Icons.delete_outline,
                         color: kRedTextColor,

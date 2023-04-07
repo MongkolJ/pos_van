@@ -28,16 +28,28 @@ class CartViewModel {
     ),
   ];
 
-  Future<void> onUserTappedDecreaseAmount({required String sku}) async {}
+  Future<void> onUserTappedDecreaseAmount({required CartItemModel item}) async {
+    bool adjustAmountResult = item.tryDecreaseAmount();
+    if (!adjustAmountResult) {
+      return;
+    }
+  }
 
-  Future<void> onUserTappedIncreaseAmount({required String sku}) async {}
+  Future<void> onUserTappedIncreaseAmount({required CartItemModel item}) async {
+    bool adjustAmountResult = item.tryIncreaseAmount();
+    if (!adjustAmountResult) {
+      return;
+    }
+  }
 
   Future<void> onUserSetItemAmount({
-    required String sku,
+    required CartItemModel item,
     required int newAmount,
-  }) async {}
+  }) async {
+    item.setAmount(amount: newAmount);
+  }
 
-  Future<void> onUserTappedDeleteButton({required String sku}) async {}
+  Future<void> onUserTappedDeleteButton({required CartItemModel item}) async {}
 
   Future<void> onUserTappedGiftPromotionButton({
     required String sku,

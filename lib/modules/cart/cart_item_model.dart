@@ -30,7 +30,7 @@ class CartItemModel {
     return (amount * price).toString();
   }
 
-  bool increaseAmount() {
+  bool tryIncreaseAmount() {
     if (amount < remainInStock) {
       amount++;
       return true;
@@ -39,7 +39,7 @@ class CartItemModel {
     return false;
   }
 
-  bool decreaseAmount() {
+  bool tryDecreaseAmount() {
     if (amount > 1) {
       amount--;
       return true;
