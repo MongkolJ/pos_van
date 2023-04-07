@@ -58,4 +58,14 @@ class CartViewModel {
   Future<void> onUserTappedDiscountPromotionButton({
     required String sku,
   }) async {}
+
+  Future<void> onUserTappedSearchButton() async {}
+
+  Future<void> onUserTappedCategoriesButton() async {}
+
+  Future<void> onUserScannedBarcode({required String barcode}) async {}
+
+  Future<void> onUserTappedCancelOrderButton() async {}
+
+  Future<void> onUserTappedConfirmOrderButton() async {}
 }
