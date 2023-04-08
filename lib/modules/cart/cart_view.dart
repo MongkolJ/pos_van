@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_listener/flutter_barcode_listener.dart';
 import 'package:pos_van/constants/decorations/colors.dart';
 import 'package:pos_van/constants/decorations/text_styles.dart';
 import 'package:pos_van/modules/cart/cart_item_model.dart';
 import 'package:pos_van/modules/cart/cart_view_model.dart';
 import 'package:pos_van/modules/cart/components/cart_item_card.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class CartView extends StatefulWidget {
   const CartView({Key? key}) : super(key: key);
@@ -13,6 +15,8 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
+  late bool _visible;
+
   final CartViewModel _viewModel = CartViewModel();
 
   @override
@@ -20,11 +24,29 @@ class _CartViewState extends State<CartView> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackgroundColor,
-        body: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).requestFocus(FocusNode());
+        body: VisibilityDetector(
+          key: const Key('cart-view-barcode-listener'),
+          onVisibilityChanged: (VisibilityInfo info) {
+            _visible = info.visibleFraction > 0;
           },
-          child: _body(),
+          child: BarcodeKeyboardListener(
+            onBarcodeScanned: (String barcode) async {
+              if (!_visible) return;
+
+              try {
+                await _viewModel.onUserScannedBarcode(barcode: barcode);
+                setState(() {});
+              } catch (_) {
+                //TODO: Show error dialog here.
+              }
+            },
+            child: GestureDetector(
+              onTap: () {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              child: _body(),
+            ),
+          ),
         ),
       ),
     );
@@ -76,18 +98,31 @@ class _CartViewState extends State<CartView> {
           setState(() {});
         },
         onUserTappedIncreaseButton: () async {
-          await _viewModel.onUserTappedIncreaseAmount(
+          bool isIncreaseSuccess = await _viewModel.onUserTappedIncreaseAmount(
             item: item,
           );
-          controller.text = item.amount.toString();
-          setState(() {});
+
+          if (isIncreaseSuccess) {
+            controller.text = item.amount.toString();
+            setState(() {});
+            return;
+          }
+
+          //TODO: show error dialog here!.
+
         },
         onUserTappedDecreaseButton: () async {
-          await _viewModel.onUserTappedDecreaseAmount(
+          bool isDecreaseSuccess = await _viewModel.onUserTappedDecreaseAmount(
             item: item,
           );
-          controller.text = item.amount.toString();
-          setState(() {});
+          if (isDecreaseSuccess) {
+            controller.text = item.amount.toString();
+            setState(() {});
+            return;
+          }
+
+          //TODO: show error dialog here!.
+
         },
         onUserSetAmount: () async {
           int? newAmount = int.tryParse(controller.text);

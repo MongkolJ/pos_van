@@ -15,7 +15,7 @@ class CartMockService implements CartServiceInterface {
       barcode: barcode,
       title: barcode,
       price: double.parse(barcode),
-      amount: int.parse(barcode),
+      amount: 1,
       remainInStock: int.parse(barcode) * 2,
     );
   }
