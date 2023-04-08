@@ -1,32 +1,10 @@
 import 'package:pos_van/modules/cart/cart_item_model.dart';
+import 'package:pos_van/services/cart_services/cart_mock_service.dart';
+import 'package:pos_van/services/cart_services/cart_service_interface.dart';
 
 class CartViewModel {
-  List<CartItemModel> items = [
-    CartItemModel(
-      sku: 'sku',
-      barcode: '8851993613102',
-      title: 'ช้างเล็กยกลัง',
-      price: 729,
-      amount: 1,
-      remainInStock: 10,
-    ),
-    CartItemModel(
-      sku: 'sku',
-      barcode: '8851993613102',
-      title: 'ช้างเล็กยกลัง',
-      price: 729,
-      amount: 1,
-      remainInStock: 10,
-    ),
-    CartItemModel(
-      sku: 'sku',
-      barcode: '8851993613102',
-      title: 'ช้างเล็กยกลัง',
-      price: 729,
-      amount: 1,
-      remainInStock: 10,
-    ),
-  ];
+  List<CartItemModel> itemsInCart = [];
+  CartServiceInterface service = CartMockService();
 
   Future<void> onUserTappedDecreaseAmount({required CartItemModel item}) async {
     bool adjustAmountResult = item.tryDecreaseAmount();

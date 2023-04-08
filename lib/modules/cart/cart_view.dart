@@ -49,11 +49,11 @@ class _CartViewState extends State<CartView> {
   Expanded _itemsList() {
     return Expanded(
       child: ListView.builder(
-        itemCount: _viewModel.items.length,
+        itemCount: _viewModel.itemsInCart.length,
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
-          CartItemModel item = _viewModel.items[index];
+          CartItemModel item = _viewModel.itemsInCart[index];
           TextEditingController controller =
               TextEditingController(text: item.amount.toString());
           return _itemCard(item, controller);
