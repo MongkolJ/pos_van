@@ -17,17 +17,34 @@ void main() {
 
   test('Create a new model from JSON', () {});
 
-  test('Request total price', () {});
+  test('Request total price', () {
+    int amount = sut.amount;
+    double price = sut.price;
+    expect(sut.totalPrice(), amount * price);
+  });
 
   group('Adjust amount', () {
-    test('Increase amount', () {});
-    test('Increase amount where current amount is equal to remainInStock',
-        () {});
+    test('Increase amount', () {
+      int amountSnapshot = sut.amount;
+      sut.tryIncreaseAmount();
+      expect(sut.amount, amountSnapshot + 1);
+    });
+
+    test('Increase amount where current amount is equal to remainInStock', () {
+      sut.amount = sut.remainInStock;
+      int amountSnapshot = sut.amount;
+      sut.tryIncreaseAmount();
+      expect(sut.amount, amountSnapshot);
+    });
+
     test('Decrease amount', () {});
+
     test('Decrease amount where current amount is equal to 1', () {});
 
     test('Set amount', () {});
+
     test('Set amount to negative quantity', () {});
+
     test('Set amount exceed remainInStock', () {});
   });
 }
