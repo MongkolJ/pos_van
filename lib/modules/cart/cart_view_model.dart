@@ -40,7 +40,7 @@ class CartViewModel {
 
   Future<void> onUserTappedCategoriesButton() async {}
 
-  Future<void> onUserScannedBarcode({required String barcode}) async {
+  Future<void> onUserAddedItem({required String barcode}) async {
     CartItemModel? scannedItem = itemsInCart.firstWhereOrNull(
       (item) => item.barcode == barcode,
     );

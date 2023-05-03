@@ -34,7 +34,7 @@ class _CartViewState extends State<CartView> {
               if (!_visible) return;
 
               try {
-                await _viewModel.onUserScannedBarcode(barcode: barcode);
+                await _viewModel.onUserAddedItem(barcode: barcode);
                 setState(() {});
               } catch (_) {
                 //TODO: Show error dialog here.
@@ -109,7 +109,6 @@ class _CartViewState extends State<CartView> {
           }
 
           //TODO: show error dialog here!.
-
         },
         onUserTappedDecreaseButton: () async {
           bool isDecreaseSuccess = await _viewModel.onUserTappedDecreaseAmount(
@@ -122,7 +121,6 @@ class _CartViewState extends State<CartView> {
           }
 
           //TODO: show error dialog here!.
-
         },
         onUserSetAmount: () async {
           int? newAmount = int.tryParse(controller.text);
